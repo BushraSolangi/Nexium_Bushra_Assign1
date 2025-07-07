@@ -1,3 +1,4 @@
+// src/components/QuoteForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -13,17 +14,21 @@ export function QuoteForm({ onSearch }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(topic);
+    if (!topic.trim()) return;
+    onSearch(topic.trim());
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex gap-2">
       <Input
         placeholder="Enter a topic (e.g., life, success)"
         value={topic}
         onChange={(e) => setTopic(e.target.value)}
+        className="flex-1"
       />
-      <Button type="submit">Get Quotes</Button>
+      <Button type="submit" className="whitespace-nowrap px-4">
+        Get Quotes
+      </Button>
     </form>
   );
 }

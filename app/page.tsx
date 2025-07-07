@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+
 import { QuoteForm } from "@/components/QuoteForm";
 import { QuoteList } from "@/components/QuoteList";
 import { getQuotesByTopic } from "@/lib/filterQuotes";
@@ -8,28 +10,29 @@ import { getQuotesByTopic } from "@/lib/filterQuotes";
 export default function Home() {
   const [quotes, setQuotes] = useState<{ topic: string; quote: string }[]>([]);
 
-  // ✅ Add it here
-  const handleSubmit = (topic: string) => {
-    console.log("Searching for topic:", topic);         // Debug: input value
+  const handleSearch = (topic: string) => {
     const result = getQuotesByTopic(topic);
-    console.log("Result:", result);                     // Debug: filtered quotes
     setQuotes(result);
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-background text-foreground px-4 py-12 sm:px-8">
-      <h1 className="text-3xl sm:text-4xl font-bold text-center mb-8">
-        💡 Quote Generator
+    <main className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground px-4 py-12">
+      <h1 className="text-4xl sm:text-5xl font-bold text-center mb-8">
+        💭 Quote Generator
       </h1>
 
-      <div className="w-full max-w-xl">
-        {/* ✅ Make sure you pass the prop name correctly */}
-        <QuoteForm onSearch={handleSubmit} />
+      {/* WIDER CONTAINER */}
+      <div className="w-full max-w-lg space-y-6 px-4 sm:px-8">
+        <QuoteForm onSearch={handleSearch} />
         <QuoteList quotes={quotes} />
       </div>
 
+      {/* Footer & Navigation */}
       <footer className="mt-16 text-sm text-muted-foreground text-center">
-        Made with ❤️ using ShadCN UI, Tailwind CSS, and Next.js
+        <Link href="/all-quotes" className="text-blue-500 hover:underline">
+          View all quotes →
+        </Link>
+        <p className="mt-4">Made with ❤️ using Next.js, Tailwind CSS & ShadCN UI</p>
       </footer>
     </main>
   );

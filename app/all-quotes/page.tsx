@@ -6,7 +6,11 @@ export default function AllQuotesPage() {
   const quotes = getAllQuotes();
 
   return (
-    <main className="min-h-screen flex flex-col items-center px-4 py-12 bg-background text-foreground">
+    <main className="min-h-screen flex flex-col items-center justify-center 
+             bg-cover bg-center bg-no-repeat text-foreground px-4 py-12"
+  style={{
+    backgroundImage: "url('/images/bg.avif')",
+  }}>
       <h1 className="text-4xl sm:text-5xl font-bold text-center mb-8">📚 All Quotes</h1>
 
       <div className="w-full max-w-4xl">
